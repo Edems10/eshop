@@ -1,0 +1,53 @@
+﻿@model CarouselViewModel
+@{
+    ViewData["Title"] = "Carousel Select";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<p>Select all data from carousel.</p>
+<br />
+<a asp-action="Create">Create Carousel Item</a>
+
+
+@{ 
+    if (Model != null && Model.Carousel != null && Model.Carousel.Count > 0)
+    {
+    <table style="width:100%">
+        <tr>
+            <th class="col-sm-1">@Html.DisplayNameFor(model => model.Carousel[0].ID)</th>
+            <th class="col-sm-1">@Html.DisplayNameFor(model => model.Carousel[0].DataTarget)</th>
+            <th class="col-sm-2">@Html.DisplayNameFor(model => model.Carousel[0].ImageSrc)</th>
+            <th class="col-sm-2">@Html.DisplayNameFor(model => model.Carousel[0].ImageAlt)</th>
+            <th class="col-sm-4">@Html.DisplayNameFor(model => model.Carousel[0].CarouselContent)</th>
+            <th class="col-sm-1">Edit</th>
+            <th class="col-sm-1">Delete</th>
+
+
+        </tr>
+        @{ foreach (var itemCarousel in Model.Carousel)
+            {
+                <tr>
+                    <td class="col-sm-1">@itemCarousel.ID</td>
+                    <td class="col-sm-1">@itemCarousel.DataTarget</td>
+                    <td class="col-sm-2">@itemCarousel.ImageSrc</td>
+                    <td class="col-sm-2">@itemCarousel.ImageAlt</td>
+                    <td class="col-sm-4">@itemCarousel.CarouselContent</td>
+                    <td class="col-sm-1"><a asp-action="Edit" asp-route-ID="@itemCarousel.ID">Edit</a></td>
+                    <td class="col-sm-1"><a asp-action="Delete" asp-route-ID="@itemCarousel.ID" onclick="return ConfirmDelete();">Delete</a></td>
+                </tr>
+                }
+            }
+       
+    </table>
+    }
+    else
+    {
+        <h2>Carousel is Empty</h2>
+    }
+    }
+
+@section Scripts
+{
+<script src="~/js/Scripts.js"></script>
+}

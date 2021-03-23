@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Succes";
+}
+<h2>@ViewData["Title"]</h2>
+<img src="~/images/Order/thank-you-your-order-neon-signboard-brick-wall_118419-1223.jpg" />
+<h3>@ViewData["Message"]</h3>
+
+<form name="confirm"asp-area="Customer" asp-controller="CustomerOrderNotCart" asp-action="ApproveOrderInSession" enctype="multipart/form-data" method="post">
+    <button id="button" type="submit" class="btn btn-primary">Continue</button>
+</form>
+
+<script>
+    window.onload = function () {
+         document.confirm.submit(); 
+    };
+</script>

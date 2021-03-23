@@ -1,0 +1,50 @@
+﻿
+<div class="row">
+
+        <p></p>
+        <p></p>
+
+        <div class="row">
+
+            @{
+                if (Model.Products != null && Model.Products.Count > 0)
+                {
+
+
+                    for (int i = 0; i < Model.Products.Count; i++)
+                    {
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="card h-100" >
+                                <a asp-area="" asp-controller="Products" asp-action="Detail" asp-route-id="@Model.Products[i].ID"><img class="card-img-top  img-rounded "height="200" width="300"  src="@Model.Products[i].ImageSrc" alt="@Model.Products[i].ImageAlt"></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a asp-area="" asp-controller="Products" asp-action="Detail" asp-route-id="@Model.Products[i].ID" >@Model.Products[i].Nazev</a>
+                                    </h4>
+                                    <h5>
+                                        @Model.Products[i].Price  <input type="button" class="btn-success" value="Buy" style="font-size:1.4em;text-align:center"
+                                                                         onclick="Buy(@Model.Products[i].ID, '@Url.Action("AddOrderItemsToSession", "CustomerOrderNotCart", new { Area = "Customer" })', '#total_price', '@System.Globalization.CultureInfo.CurrentCulture.Name')" />
+                                </h5>
+                                @{ string slova = null;
+                                    string[] SplittedStrings = Model.Products[i].DetailProduktu.Split(" ");
+
+                                    if(SplittedStrings.Length>4)
+                                    {
+                                        slova = SplittedStrings[0] +" "+SplittedStrings[1] + " "+SplittedStrings[2] + " "+SplittedStrings[3] + "...";
+                                    }
+
+                                    <p class="card-text">@slova</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            }
+            }
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.col-lg-9 -->
+

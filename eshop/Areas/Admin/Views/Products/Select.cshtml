@@ -1,0 +1,57 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "Product Select";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<p>Select all data from carousel.</p>
+<br />
+<a asp-action="Create">Create Product Item</a>
+
+
+@{
+    if (Model != null && Model.Product != null && Model.Product.Count > 0)
+    {
+        <table style="width:100%">
+            <tr>
+                <th class="col-sm-1">@Html.DisplayNameFor(model => model.Product[0].ID)</th>
+                <th class="col-sm-1">@Html.DisplayNameFor(model => model.Product[0].Nazev)</th>
+                <th class="col-sm-1">@Html.DisplayNameFor(model => model.Product[0].Price)</th>
+                <th class="col-sm-1">@Html.DisplayNameFor(model => model.Product[0].Category)</th>
+                <th class="col-sm-2">@Html.DisplayNameFor(model => model.Product[0].ImageSrc)</th>
+                <th class="col-sm-2">@Html.DisplayNameFor(model => model.Product[0].ImageAlt)</th>
+                <th class="col-sm-4">@Html.DisplayNameFor(model => model.Product[0].DetailProduktu)</th>
+                <th class="col-sm-1">Edit</th>
+                <th class="col-sm-1">Delete</th>
+
+
+            </tr>
+            @{ foreach (var itemProduct in Model.Product)
+                {
+                        <tr>
+                            <td class="col-sm-1">@itemProduct.ID</td>
+                            <td class="col-sm-1">@itemProduct.Nazev</td>
+                            <td class="col-sm-1">@itemProduct.Price</td>
+                            <td class="col-sm-1">@itemProduct.Category</td>
+                            <td class="col-sm-2">@itemProduct.ImageSrc</td>
+                            <td class="col-sm-2">@itemProduct.ImageAlt</td>
+                            <td class="col-sm-4">@itemProduct.DetailProduktu</td>
+                            <td class="col-sm-1"><a asp-action="Edit" asp-route-ID="@itemProduct.ID">Edit</a></td>
+                            <td class="col-sm-1"><a asp-action="Delete" asp-route-ID="@itemProduct.ID" onclick="return ConfirmDelete();">Delete</a></td>
+                        </tr>
+                }
+            }
+
+        </table>
+    }
+    else
+    {
+        <h2>Product is Empty</h2>
+    }
+}
+
+@section Scripts
+{
+    <script src="~/js/Scripts.js"></script>
+}
